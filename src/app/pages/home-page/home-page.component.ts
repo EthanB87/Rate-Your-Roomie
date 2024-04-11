@@ -11,10 +11,6 @@ import {NavbarComponent} from "../../partials/navbar/navbar.component";
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent implements OnInit{
-  db = inject(DatabaseService);
+export class HomePageComponent {
 
-  ngOnInit(): void {
-    this.db.initDatabase();
-  }
 }

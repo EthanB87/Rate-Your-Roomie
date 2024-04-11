@@ -50,7 +50,7 @@ export class RoommateDALService {
         console.log("Error: error in selectAll transaction: " + event);
       };
 
-      const roommateStore = transaction.objectStore("books");
+      const roommateStore = transaction.objectStore("roommates");
 
       const roommateCursor = roommateStore.openCursor();
       let roommates: Roommate[] = [];

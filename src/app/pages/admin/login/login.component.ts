@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {SignUp} from "../../../../models/SignUp.Model";
 import {Login} from "../../../../models/Login.Model";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import {DatabaseService} from "../../../../services/database.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,13 @@ import { CommonModule } from "@angular/common";
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+
+  db = inject(DatabaseService);
+
+  ngOnInit(): void {
+    this.db.initDatabase();
+  }
 
   isSignUpVisible: boolean  = true;
 
@@ -36,7 +43,7 @@ export class LoginComponent {
       users.push(this.signUp);
       localStorage.setItem("accounts", JSON.stringify(users))
     }
-    this.router.navigateByUrl("/add");
+    this.router.navigateByUrl("/new");
   }
 
   onLogin() {

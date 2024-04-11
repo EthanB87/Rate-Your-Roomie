@@ -1,1 +1,16 @@
-<p>all-users works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Roommate List</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let roommate of roommates; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ roommate.firstName }} {{ roommate.lastName }}</h5>
+          <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
+          <p class="card-text"><strong>School Name:</strong> {{ roommate.schoolName }}</p>
+          <p class="card-text"><strong>Prefer to Live With:</strong> {{ roommate.gender}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

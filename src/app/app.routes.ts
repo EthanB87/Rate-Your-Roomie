@@ -11,7 +11,7 @@ export const routes: Routes = [
   {path: "home", component: HomePageComponent},
   {path: "add", component: AddRoommateComponent},
   {path: "all", component: AllUsersComponent},
-  {path: "", redirectTo: 'error', pathMatch: "full"},
+  {path: "", redirectTo: 'login', pathMatch: "full"},
   {path: "error", component: ErrorPageComponent},
   {path: "search", component: SearchComponent},
   {path: "new", component: NewUserComponent},
