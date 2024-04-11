@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="parent">
+<div class="container" [ngClass]="isSignUpVisible ? 'active' :'' " id="container">
+  <div class="form-container sign-up" >
+    <form>
+      <h1>Create Account</h1>
+      <input type="email" name="email" [(ngModel)]="signUp.email" placeholder="Email">
+      <input type="password" name="password"  [(ngModel)]="signUp.password" placeholder="Password">
+      <button (click)="onRegister()">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in" >
+    <form>
+      <h1>Welcome Back!</h1>
+      <input type="email" name="email" [(ngModel)]="login.email" placeholder="Email">
+      <input type="password" name="password"   [(ngModel)]="login.password" placeholder="Password">
+      <button (click)="onLogin()">Sign In</button>
+    </form>
+  </div>
+  <div class="toggle-container">
+    <div class="toggle">
+      <div class="toggle-panel toggle-left">
+        <h1>Got a Account?</h1>
+        <button type="button" class="hidden" id="login" (click)="isSignUpVisible = false">Sign In</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <h1>Hi! 👋</h1>
+        <p>Register an Account With Us to Find the Perfect Roommate!</p>
+        <button type="button" class="hidden" id="register" (click)="isSignUpVisible = true">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
