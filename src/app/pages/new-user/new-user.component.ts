@@ -18,9 +18,7 @@ import {RoommateDALService} from "../../../services/roommate-dal.service";
 export class NewUserComponent {
   roommate: Roommate = new Roommate("", "", new Date(),"", "",
     "", []);
-
   dal = inject(RoommateDALService);
-  constructor(private roommateDALService: RoommateDALService) {}
 
   onSubmit(): void {
     // Insert roommate review into the database
