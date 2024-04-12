@@ -48,77 +48,106 @@ export class DatabaseService {
             "lastName": "Doe",
             "dob": "1999-01-15",
             "schoolName": "University of Toronto",
-            "gender": "male"
+            "gender": "male",
+            "reviews": []
           },
           {
             "firstName": "Jane",
             "lastName": "Smith",
             "dob": "2000-05-20",
             "schoolName": "McGill University",
-            "gender": "female"
+            "gender": "female",
+            "reviews": []
           },
           {
             "firstName": "Alex",
             "lastName": "Johnson",
             "dob": "2001-11-30",
             "schoolName": "University of British Columbia",
-            "gender": "either"
+            "gender": "either",
+            "reviews": []
           },
           {
             "firstName": "Emily",
             "lastName": "Brown",
             "dob": "2002-03-10",
             "schoolName": "University of Waterloo",
-            "gender": "female"
+            "gender": "female",
+            "reviews": [
+              {
+                "responsibility": 4,
+                "cleanliness": 5,
+                "friendliness": 3,
+                "noise": 2,
+                "petFriendly": true,
+                "smoking": false
+              }
+            ]
           },
           {
             "firstName": "Michael",
             "lastName": "Davis",
             "dob": "2003-07-05",
             "schoolName": "University of Alberta",
-            "gender": "male"
+            "gender": "male",
+            "reviews": []
           },
           {
             "firstName": "Sarah",
             "lastName": "Wilson",
             "dob": "2004-09-25",
             "schoolName": "University of Ottawa",
-            "gender": "either"
+            "gender": "either",
+            "reviews": []
           },
           {
             "firstName": "David",
             "lastName": "Martinez",
             "dob": "2005-04-18",
             "schoolName": "University of Calgary",
-            "gender": "male"
+            "gender": "male",
+            "reviews": []
           },
           {
             "firstName": "Simon",
             "lastName": "Brubacher",
             "dob": "2001-06-10",
             "schoolName": "Conestoga College",
-            "gender": "male"
+            "gender": "male",
+            "reviews": [
+              {
+                "responsibility": 4,
+                "cleanliness": 4,
+                "friendliness": 5,
+                "noise": 3,
+                "petFriendly": true,
+                "smoking": false
+              }
+            ]
           },
           {
             "firstName": "Noah",
             "lastName": "McCracken",
             "dob": "2003-04-06",
-            "schoolName": "Wilford Laurier",
-            "gender": "male"
+            "schoolName": "Wilfrid Laurier",
+            "gender": "male",
+            "reviews": []
           },
           {
             "firstName": "Kurt",
             "lastName": "Sialana",
             "dob": "1998-05-22",
             "schoolName": "Conestoga College",
-            "gender": "male"
+            "gender": "male",
+            "reviews": []
           },
           {
             "firstName": "Abby",
             "lastName": "Swartz",
             "dob": "2003-09-16",
-            "schoolName": "Wilford Laurier",
-            "gender": "female"
+            "schoolName": "Wilfrid Laurier",
+            "gender": "female",
+            "reviews": []
           }
         ];
         // @ts-ignore

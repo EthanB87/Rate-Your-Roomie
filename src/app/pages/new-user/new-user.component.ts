@@ -17,7 +17,7 @@ import {RoommateDALService} from "../../../services/roommate-dal.service";
 })
 export class NewUserComponent {
   roommate: Roommate = new Roommate("", "", new Date(),"", "",
-    "");
+    "", []);
 
   dal = inject(RoommateDALService);
   constructor(private roommateDALService: RoommateDALService) {}
@@ -37,6 +37,6 @@ export class NewUserComponent {
   resetForm(): void {
     // Reset the form fields and ratings
     this.roommate = new Roommate("", "", new Date(), "", "",
-      "");
+      "", []);
   }
 }

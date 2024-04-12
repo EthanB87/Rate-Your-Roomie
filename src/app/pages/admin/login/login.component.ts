@@ -19,6 +19,7 @@ import {DatabaseService} from "../../../../services/database.service";
 export class LoginComponent implements OnInit{
 
   db = inject(DatabaseService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.db.initDatabase();
@@ -28,9 +29,6 @@ export class LoginComponent implements OnInit{
 
   signUp: SignUp  = new SignUp();
   login: Login  = new Login();
-
-  constructor(private router: Router){}
-
 
   onRegister() {
     const localUser = localStorage.getItem("accounts");

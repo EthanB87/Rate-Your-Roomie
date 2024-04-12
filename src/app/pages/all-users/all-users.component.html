@@ -1,16 +1,25 @@
-<app-navbar></app-navbar>
+<app-navbar/>
+<app-search (filterApplied)="filterRoommates($event)"/>
 <div class="container">
   <h2>Roommate List</h2>
   <div class="row">
     <div class="col-md-4" *ngFor="let roommate of roommates; let i = index">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ roommate.firstName }} {{ roommate.lastName }}</h5>
-          <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
-          <p class="card-text"><strong>School Name:</strong> {{ roommate.schoolName }}</p>
-          <p class="card-text"><strong>Prefer to Live With:</strong> {{ roommate.gender}}</p>
+      <a (click)="navigateToReview(roommate)" class="card-link">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ roommate.firstName }} {{ roommate.lastName }}</h5>
+            <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
+            <p class="card-text"><strong>School Name:</strong> {{ roommate.schoolName }}</p>
+            <p class="card-text"><strong>Prefer to Live With:</strong> {{ roommate.gender}}</p>
+            <p class="card-text"><strong>Responsibility:</strong> {{ calculateAverageRating(roommate, "responsibility") }}</p>
+            <p class="card-text"><strong>Cleanliness:</strong> {{ calculateAverageRating(roommate, "cleanliness") }}</p>
+            <p class="card-text"><strong>Friendliness:</strong> {{ calculateAverageRating(roommate,"friendliness") }}</p>
+            <p class="card-text"><strong>Noise:</strong> {{ calculateAverageRating(roommate, "noise") }}</p>
+            <p class="card-text"><strong>Pet Friendly:</strong> {{ calculateDisplayBooleans(roommate).petFriendly}}</p>
+            <p class="card-text"><strong>Smoking:</strong> {{ calculateDisplayBooleans(roommate).smoking}}</p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
