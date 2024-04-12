@@ -41,31 +41,37 @@ export class RoommateDALService {
 
   selectAll(): Promise<Roommate[]> {
     return new Promise((resolve, reject) => {
-      const transaction = this.database.db.transaction(["roommates"]); //readonly
+      const transaction = this.database.db.transaction(["roommates"], "readonly");
 
       transaction.oncomplete = (event: any) => {
         console.log("Success: selectAll transaction successful");
       };
+
       transaction.onerror = (event: any) => {
-        console.log("Error: error in selectAll transaction: " + event);
+        console.error("Error: error in selectAll transaction:", event.target.error);
+        reject(event.target.error);
       };
 
       const roommateStore = transaction.objectStore("roommates");
-
       const roommateCursor = roommateStore.openCursor();
-      let roommates: Roommate[] = [];
+      const roommates: Roommate[] = [];
+
       roommateCursor.onsuccess = (event: any) => {
-      const cursor = event.target.result;
-      console.log(cursor);
-      if (cursor) {
-      console.log(`Name ${cursor.key} is ${cursor.value.name}`);
-      roommates.push(cursor.value);
-      cursor.continue();
-      }
-      else {
-      console.log("No more entries!");
-      resolve(roommates);
-      }};
+        const cursor = event.target.result;
+        if (cursor) {
+          console.log(`Name ${cursor.key} is ${cursor.value}`);
+          roommates.push(cursor.value);
+          cursor.continue();
+        } else {
+          console.log("No more entries!");
+          resolve(roommates);
+        }
+      };
+
+      roommateCursor.onerror = (event: any) => {
+        console.error("Error: error in cursor iteration:", event.target.error);
+        reject(event.target.error);
+      };
     });
   }
 

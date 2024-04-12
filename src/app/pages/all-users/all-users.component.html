@@ -1,9 +1,9 @@
 <app-navbar/>
-<app-search (filterApplied)="filterRoommates($event)"/>
 <div class="container">
   <h2>Roommate List</h2>
+  <app-search (searchApplied)="filterRoommates()"/>
   <div class="row">
-    <div class="col-md-4" *ngFor="let roommate of roommates; let i = index">
+    <div class="col-md-4 mb-4" *ngFor="let roommate of filteredRoommates; let i = index">
       <a (click)="navigateToReview(roommate)" class="card-link">
         <div class="card">
           <div class="card-body">

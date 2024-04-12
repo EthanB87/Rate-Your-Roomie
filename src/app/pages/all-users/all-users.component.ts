@@ -6,6 +6,7 @@ import {NavbarComponent} from "../../partials/navbar/navbar.component";
 import {NgForOf} from "@angular/common";
 import {Review} from "../../../models/Review.Model";
 import {SearchComponent} from "../search/search.component";
+import {DatabaseService} from "../../../services/database.service";
 
 @Component({
   selector: 'app-all-users',
@@ -20,8 +21,11 @@ import {SearchComponent} from "../search/search.component";
 })
 export class AllUsersComponent {
   roommates: Roommate[] = [];
+  filteredRoommates: Roommate[];
   dal = inject(RoommateDALService);
+  db = inject(DatabaseService);
   router = inject(Router);
+  searchQuery: string = "";
 
   navigateToReview(roommate: Roommate) {
     this.router.navigate(["/add", roommate.id]);
@@ -29,15 +33,24 @@ export class AllUsersComponent {
 
   constructor() {
     this.showAll()
+    this.filteredRoommates = this.roommates.slice();
+  }
+
+  ngOnInit(): void {
+    // Initialize the database
+    this.db.initDatabase();
+      this.showAll();
   }
 
   showAll() {
     this.dal.selectAll().then((data) => {
       this.roommates = data;
       console.log(this.roommates)
+      this.filteredRoommates = this.roommates.slice();
     }).catch((e) => {
       console.log(e);
       this.roommates = [];
+      this.filteredRoommates = [];
     })
   }
   calculateAge(dob: Date): number {
@@ -89,24 +102,14 @@ export class AllUsersComponent {
     return { petFriendly, smoking };
   }
 
-  filterRoommates(filter: string) {
-    if(filter === "petFriendly") {
-      this.roommates = this.roommates.filter(roommate => this.calculateDisplayBooleans(roommate).petFriendly);
-    }
-    if(filter === "smoking") {
-      this.roommates= this.roommates.filter(roommate => this.calculateDisplayBooleans(roommate).smoking);
-    }
-    if(filter === "responsibility") {
-      this.roommates = this.roommates.filter((roommate => this.calculateAverageRating(roommate, "responsibility")));
-    }
-    if(filter === "cleanliness") {
-      this.roommates = this.roommates.filter((roommate => this.calculateAverageRating(roommate, "cleanliness")));
-    }
-    if(filter === "friendliness") {
-      this.roommates = this.roommates.filter((roommate => this.calculateAverageRating(roommate, "friendliness")));
-    }
-    if(filter === "noise") {
-      this.roommates = this.roommates.filter((roommate => this.calculateAverageRating(roommate, "noise")));
+  filterRoommates() {
+    if (this.searchQuery.trim() !== "") {
+      this.filteredRoommates = this.roommates.filter(roommate =>
+        `${roommate.firstName} ${roommate.lastName}`.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      // If the search query is empty, show all roommates
+      this.filteredRoommates = this.roommates.slice();
     }
   }
 }

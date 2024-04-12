@@ -1,12 +1,3 @@
-<div>
-  <label><input type="checkbox" name="filter" (change)="applyFilter('petFriendly')"> Pet Friendly</label>
-  <label><input type="checkbox" name="filter" (change)="applyFilter('smoking')"> Smoking</label>
-  <label for="responsibility">Responsibility:</label>
-  <input type="number" name="filter" id="responsibility" (change)="applyFilter('responsibility')" min="1" max="5">
-  <label for="responsibility">Cleanliness:</label>
-  <input type="number" name="filter" id="cleanliness" (change)="applyFilter('cleanliness')" min="1" max="5">
-  <label for="responsibility">Friendliness:</label>
-  <input type="number" name="filter" id="friendliness" (change)="applyFilter('friendliness')" min="1" max="5">
-  <label for="responsibility">Noise:</label>
-  <input type="number" name="filter" id="noise" (change)="applyFilter('noise')" min="1" max="5">
+<div class="form-group">
+  <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="searchQuery" (input)="onSearch()">
 </div>
