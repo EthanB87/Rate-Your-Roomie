@@ -71,7 +71,17 @@
                 }
               }
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <div class="container">
+              <div class="row justify-content-center">
+                <button class="btn btn-primary col-10 mt-5" (click)="getLocation()">Set Location</button>
+              </div>
+              <div>
+                <div class="container" id="mapContainer" style="width: auto; height: 400px"></div>
+              </div>
+            </div>
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </div>
           </form>
         </div>
       </div>

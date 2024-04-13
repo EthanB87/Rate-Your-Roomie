@@ -20,7 +20,8 @@ import {DatabaseService} from "../../../services/database.service";
 })
 export class AllUsersComponent {
   roommates: Roommate[] = [];
-  selectedRoommate: Roommate = new Roommate("", "", "", "", "", []);
+  selectedRoommate: Roommate = new Roommate("", "", "", "", "",
+    0, 0, []);
   dal = inject(RoommateDALService);
   db = inject(DatabaseService);
   router = inject(Router);
