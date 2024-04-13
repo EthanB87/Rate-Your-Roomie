@@ -1,33 +1,73 @@
 <div class="parent">
-<div class="container" [ngClass]="isSignUpVisible ? 'active' :'' " id="container">
-  <div class="form-container sign-up" >
-    <form>
-      <h1>Create Account</h1>
-      <input type="email" name="email" [(ngModel)]="signUp.email" placeholder="Email">
-      <input type="password" name="password"  [(ngModel)]="signUp.password" placeholder="Password">
-      <button (click)="onRegister()">Sign Up</button>
-    </form>
-  </div>
-  <div class="form-container sign-in" >
-    <form>
-      <h1>Welcome Back!</h1>
-      <input type="email" name="email" [(ngModel)]="login.email" placeholder="Email">
-      <input type="password" name="password"   [(ngModel)]="login.password" placeholder="Password">
-      <button (click)="onLogin()">Sign In</button>
-    </form>
-  </div>
-  <div class="toggle-container">
-    <div class="toggle">
-      <div class="toggle-panel toggle-left">
-        <h1>Got a Account?</h1>
-        <button type="button" class="hidden" id="login" (click)="isSignUpVisible = false">Sign In</button>
-      </div>
-      <div class="toggle-panel toggle-right">
-        <h1>Hi! 👋</h1>
-        <p>Register an Account With Us to Find the Perfect Roommate!</p>
-        <button type="button" class="hidden" id="register" (click)="isSignUpVisible = true">Sign Up</button>
+  <div class="container" [ngClass]="isSignUpVisible ? 'active' : ''" id="container">
+    <div class="form-container sign-up">
+      <form [formGroup]="accountForm">
+        <h1>Create Account</h1>
+        <div>
+          <input type="text" class="form-control" formControlName="email" placeholder="Email">
+          @if (refEmail.invalid && (refEmail.touched || refEmail.dirty)){
+            @if (refEmail.errors?.['required']) {
+              <small class="text-danger">Email is required</small><br>
+            }
+            @if (refEmail.errors?.['email']) {
+              <small class="text-danger">Must be a valid email</small><br>
+            }
+          }
+        </div>
+        <div>
+          <input type="password" formControlName="password" placeholder="Password">
+          @if (refPassword.invalid && (refPassword.touched || refPassword.dirty)){
+            @if (refPassword.errors?.['required']) {
+              <small class="text-danger">Password is required</small><br>
+            }
+            @if (refPassword.errors?.['email']) {
+              <small class="text-danger">Must be between 8 and 16 characters long</small><br>
+            }
+          }
+        </div>
+        <button type="button" (click)="onRegister()">Sign Up</button>
+      </form>
+    </div>
+    <div class="form-container sign-in">
+      <form [formGroup]="accountForm">
+        <h1>Welcome Back!</h1>
+        <div>
+          <input type="text" class="form-control" formControlName="email" placeholder="Email">
+          @if (refEmail.invalid && (refEmail.touched || refEmail.dirty)){
+            @if (refEmail.errors?.['required']) {
+              <small class="text-danger">Email is required</small><br>
+            }
+            @if (refEmail.errors?.['email']) {
+              <small class="text-danger">Must be a valid email</small><br>
+            }
+          }
+        </div>
+        <div>
+          <input type="password" formControlName="password" placeholder="Password">
+          @if (refPassword.invalid && (refPassword.touched || refPassword.dirty)){
+            @if (refPassword.errors?.['required']) {
+              <small class="text-danger">Password is required</small><br>
+            }
+            @if (refPassword.errors?.['email']) {
+              <small class="text-danger">Must be between 8 and 16 characters long</small><br>
+            }
+          }
+        </div>
+        <button type="button" (click)="onLogin()">Sign In</button>
+      </form>
+    </div>
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Got a Account?</h1>
+          <button type="button" class="hidden" id="login" (click)="isSignUpVisible = false">Sign In</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Hi! 👋</h1>
+          <p>Register an Account With Us to Find the Perfect Roommate!</p>
+          <button type="button" class="hidden" id="register" (click)="isSignUpVisible = true">Sign Up</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

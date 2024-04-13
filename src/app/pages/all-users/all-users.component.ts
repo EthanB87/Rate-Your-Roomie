@@ -43,7 +43,6 @@ export class AllUsersComponent {
       console.log(this.roommates)
     }).catch((e) => {
       console.log(e);
-      this.roommates = [];
     })
   }
   calculateAge(dob: Date): number {
@@ -76,6 +75,7 @@ export class AllUsersComponent {
   calculateDisplayBooleans(roommate: Roommate): { petFriendly: string, smoking: string } {
     let petFriendlyCount = 0;
     let smokingCount = 0;
+    let totalReviews = 0;
 
     // Iterate over the reviews of the roommate
     roommate.reviews.forEach((review: Review) => {
@@ -87,6 +87,11 @@ export class AllUsersComponent {
       }
     });
 
+    totalReviews = roommate.reviews.length;
+
+    if(totalReviews === 0){
+      return {petFriendly: "", smoking: ""};
+    }
     // Determine which boolean values are more common
     const petFriendly = petFriendlyCount > roommate.reviews.length / 2 ? "Pet Friendly" : "Not Pet Friendly";
 

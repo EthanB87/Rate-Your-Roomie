@@ -9,12 +9,14 @@
             <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
             <p class="card-text"><strong>School Name:</strong> {{ roommate.schoolName }}</p>
             <p class="card-text"><strong>Prefer to Live With:</strong> {{ roommate.gender}}</p>
-            <p class="card-text"><strong>Responsibility:</strong> {{ calculateAverageRating(roommate, "responsibility") }}</p>
-            <p class="card-text"><strong>Cleanliness:</strong> {{ calculateAverageRating(roommate, "cleanliness") }}</p>
-            <p class="card-text"><strong>Friendliness:</strong> {{ calculateAverageRating(roommate,"friendliness") }}</p>
-            <p class="card-text"><strong>Noise:</strong> {{ calculateAverageRating(roommate, "noise") }}</p>
-            <p class="card-text"><strong>Pet Friendly:</strong> {{ calculateDisplayBooleans(roommate).petFriendly}}</p>
-            <p class="card-text"><strong>Smoking:</strong> {{ calculateDisplayBooleans(roommate).smoking}}</p>
+            <div *ngIf="">
+              <p class="card-text"> <strong>Responsibility:</strong>{{ calculateAverageRating(roommate, "responsibility") }}</p>
+              <p class="card-text"><strong>Cleanliness:</strong> {{ calculateAverageRating(roommate, "cleanliness") }}</p>
+              <p class="card-text"><strong>Friendliness:</strong> {{ calculateAverageRating(roommate,"friendliness") }}</p>
+              <p class="card-text"><strong>Noise:</strong> {{ calculateAverageRating(roommate, "noise") }}</p>
+              <p class="card-text"><strong>Pet Friendly:</strong> {{ calculateDisplayBooleans(roommate).petFriendly}}</p>
+              <p class="card-text"><strong>Smoking:</strong> {{ calculateDisplayBooleans(roommate).smoking}}</p>
+            </div>
             <button (click)="navigateToAllReviews(roommate)" class="card-link">See all Reviews</button>
             <button (click)="navigateToReview(roommate)" class="card-link">Add a New Review</button>
           </div>

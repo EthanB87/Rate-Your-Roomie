@@ -39,8 +39,14 @@ export class DatabaseService {
         this.db = event.target.result;
         const roommatesStore = this.db.createObjectStore("roommates", {
           keyPath: "id",
-          autoIncrement: true,
+          autoIncrement: true
         });
+        const accountsStore = this.db.createObjectStore("accounts", {
+          keyPath: "id",
+          autoIncrement: true
+        });
+
+        accountsStore.createIndex("email", "email", {unique: true});
 
         const dummyData = [
           {

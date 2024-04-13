@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NavbarComponent} from "../../partials/navbar/navbar.component";
 import {Roommate} from "../../../models/Roommate.Model";
 import {RoommateDALService} from "../../../services/roommate-dal.service";
@@ -19,18 +19,18 @@ export class NewUserComponent {
   roommate: Roommate = new Roommate("", "", new Date(),"", "",
     "", []);
   dal = inject(RoommateDALService);
-
+  fb = inject(FormBuilder);
 
 
   onSubmit(): void {
     // Insert roommate review into the database
     this.dal.insert(this.roommate)
       .then(() => {
-        console.log('Roommate review added successfully');
+        console.log('Roommate added successfully');
         this.resetForm();
       })
-      .catch(error => {
-        console.error('Error adding roommate review:', error);
+      .catch(e => {
+        console.error('Error adding roommate:', e);
       });
   }
 

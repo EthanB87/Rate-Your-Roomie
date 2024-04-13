@@ -1,62 +1,80 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {SignUp} from "../../../models/SignUp.Model";
-import {Login} from "../../../models/Login.Model";
+import {Account} from "../../../models/Account.Model";
 import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import {DatabaseService} from "../../../services/database.service";
+import {AccountDalService} from "../../../services/account-dal.service";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
-
+export class LoginComponent implements OnInit {
+  fb = inject(FormBuilder);
   db = inject(DatabaseService);
+  dal = inject(AccountDalService);
   router = inject(Router);
+  isSignUpVisible: boolean = true;
+
+  accountForm = this.fb.group({
+    email: ["", [Validators.required, Validators.email]],
+    password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
+  });
+
+  refEmail = this.accountForm.controls["email"];
+  refPassword = this.accountForm.controls["password"];
+
 
   ngOnInit(): void {
     this.db.initDatabase();
   }
 
-  isSignUpVisible: boolean  = true;
-
-  signUp: SignUp  = new SignUp();
-  login: Login  = new Login();
-
   onRegister() {
-    const localUser = localStorage.getItem("accounts");
-    if(localUser != null) {
-      const users =  JSON.parse(localUser);
-      users.push(this.signUp);
-      localStorage.setItem("accounts", JSON.stringify(users))
-    } else {
-      const users = [];
-      users.push(this.signUp);
-      localStorage.setItem("accounts", JSON.stringify(users))
+    if (this.accountForm.valid) {
+      const email = this.accountForm.get('email')?.value;
+      const password = this.accountForm.get('password')?.value;
+      const account = new Account(email, password);
+
+      this.dal.insert(account)
+        .then(() => {
+          console.log('Account added successfully');
+          this.router.navigateByUrl('/new');
+        })
+        .catch(e => {
+          console.error('Error adding account:', e);
+        });
+    } else{
+      alert("Please Enter a Valid Email or Password");
     }
-    this.router.navigateByUrl("/new");
   }
 
   onLogin() {
-    const localUsers =  localStorage.getItem("accounts");
-    if(localUsers != null) {
-      const users =  JSON.parse(localUsers);
+    if (this.accountForm.valid) {
+      const email = this.accountForm.get('email')?.value;
+      const password = this.accountForm.get('password')?.value;
 
-      const isUserPresent =  users.find( (user:SignUp)=> user.email == this.login.email && user.password == this.login.password);
-      if(isUserPresent != undefined) {
-        localStorage.setItem("loggedUser", JSON.stringify(isUserPresent));
-        this.router.navigateByUrl("/home");
-      } else {
-        alert("No account Found :(")
-      }
+      this.dal.select(email, password)
+        .then(account => {
+          if (account) {
+            this.router.navigateByUrl('/home');
+          }
+        })
+        .catch(e => {
+          console.log('Error Getting Account', e);
+          console.log("error with promise");
+          alert('Invalid Email or Password');
+        });
+    } else {
+      console.log("error with form");
+      alert('Invalid Email or Password');
     }
   }
-
 }
