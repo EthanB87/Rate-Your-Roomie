@@ -3,7 +3,7 @@
   margin: 50px auto;
   position: relative;
 }
-.get-in-touch .title {
+.title {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -69,6 +69,3 @@ input, label{
   color: #e7717d;
 }
 
-h2{
-  color: #ee7777;
-}

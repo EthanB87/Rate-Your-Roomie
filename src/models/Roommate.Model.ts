@@ -2,22 +2,20 @@ import {Review} from "./Review.Model";
 
 export class Roommate {
   id: number | undefined;
-  firstName: string;
-  lastName: string;
-  dob: Date;
-  gender: string;
-  schoolName: string;
-  email: string;
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+  dob: string | null | undefined;
+  gender: string | null | undefined;
+  schoolName: string | null | undefined;
   reviews: Review[];
 
-  constructor(firstName: string, lastName: string, dob: Date, schoolName: string, email: string,
-              gender: string, reviews: Review[]) {
+  constructor(firstName: string | null | undefined, lastName: string | null | undefined, dob: string | null | undefined, schoolName: string | null | undefined,
+              gender: string | null | undefined, reviews: any[]) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.dob = dob;
     this.gender = gender;
     this.schoolName = schoolName;
-    this.email = email;
     this.reviews = reviews;
   }
 }

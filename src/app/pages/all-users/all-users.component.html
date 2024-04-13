@@ -9,8 +9,9 @@
             <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
             <p class="card-text"><strong>School Name:</strong> {{ roommate.schoolName }}</p>
             <p class="card-text"><strong>Prefer to Live With:</strong> {{ roommate.gender}}</p>
-            <div *ngIf="">
-              <p class="card-text"> <strong>Responsibility:</strong>{{ calculateAverageRating(roommate, "responsibility") }}</p>
+            <div *ngIf="roommate.reviews.length > 0">
+              <h5 class="mt-3 mb-2">Average Ratings</h5>
+              <p class="card-text"><strong>Responsibility:</strong>{{ calculateAverageRating(roommate, "responsibility") }}</p>
               <p class="card-text"><strong>Cleanliness:</strong> {{ calculateAverageRating(roommate, "cleanliness") }}</p>
               <p class="card-text"><strong>Friendliness:</strong> {{ calculateAverageRating(roommate,"friendliness") }}</p>
               <p class="card-text"><strong>Noise:</strong> {{ calculateAverageRating(roommate, "noise") }}</p>

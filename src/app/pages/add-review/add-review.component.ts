@@ -17,8 +17,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './add-review.component.css'
 })
 export class AddReviewComponent {
-  roommate: Roommate = new Roommate("", "", new Date(),"", "",
-    "", []);
+  roommate: Roommate = new Roommate("", "", "", "", "", []);
   review: Review = new Review(1, 1, 1, 1, false, false);
   dal = inject(RoommateDALService);
   activatedRoute = inject(ActivatedRoute);

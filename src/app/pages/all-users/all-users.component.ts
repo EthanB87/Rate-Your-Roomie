@@ -3,7 +3,7 @@ import {Roommate} from "../../../models/Roommate.Model";
 import {RoommateDALService} from "../../../services/roommate-dal.service";
 import {Router} from "@angular/router";
 import {NavbarComponent} from "../../partials/navbar/navbar.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Review} from "../../../models/Review.Model";
 import {DatabaseService} from "../../../services/database.service";
 
@@ -13,14 +13,14 @@ import {DatabaseService} from "../../../services/database.service";
   imports: [
     NavbarComponent,
     NgForOf,
+    NgIf,
   ],
   templateUrl: './all-users.component.html',
   styleUrl: './all-users.component.css'
 })
 export class AllUsersComponent {
   roommates: Roommate[] = [];
-  selectedRoommate: Roommate = new Roommate("", "", new Date(), "",
-    "", "", []);
+  selectedRoommate: Roommate = new Roommate("", "", "", "", "", []);
   dal = inject(RoommateDALService);
   db = inject(DatabaseService);
   router = inject(Router);
@@ -34,6 +34,7 @@ export class AllUsersComponent {
     this.router.navigate(["/reviews", roommate.id])
   }
   constructor() {
+    this.db.initDatabase();
     this.showAll()
   }
 
@@ -45,8 +46,10 @@ export class AllUsersComponent {
       console.log(e);
     })
   }
-  calculateAge(dob: Date): number {
+
+  calculateAge(dob: string | null | undefined): number {
     const today = new Date();
+    // @ts-ignore
     const birthDate = new Date(dob);
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();

@@ -3,7 +3,7 @@
   <div class="card shadow-sm border-0 rounded">
         <div class="card-body">
           <h2 class="title">Add Profile</h2>
-          <form id="addForm" [formGroup]="newUserForm">
+          <form id="addForm" [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label for="firstName">First Name</label>
               <input type="text" class="form-control" id="firstName" formControlName="firstName" name="firstName">
@@ -71,7 +71,7 @@
                 }
               }
             </div>
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
           </form>
         </div>
       </div>
