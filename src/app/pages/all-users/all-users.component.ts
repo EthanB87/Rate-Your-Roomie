@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {NavbarComponent} from "../../partials/navbar/navbar.component";
 import {NgForOf} from "@angular/common";
 import {Review} from "../../../models/Review.Model";
-import {SearchComponent} from "../search/search.component";
 import {DatabaseService} from "../../../services/database.service";
 
 @Component({
@@ -14,43 +13,37 @@ import {DatabaseService} from "../../../services/database.service";
   imports: [
     NavbarComponent,
     NgForOf,
-    SearchComponent
   ],
   templateUrl: './all-users.component.html',
   styleUrl: './all-users.component.css'
 })
 export class AllUsersComponent {
   roommates: Roommate[] = [];
-  filteredRoommates: Roommate[];
+  selectedRoommate: Roommate = new Roommate("", "", new Date(), "",
+    "", "", []);
   dal = inject(RoommateDALService);
   db = inject(DatabaseService);
   router = inject(Router);
-  searchQuery: string = "";
 
   navigateToReview(roommate: Roommate) {
     this.router.navigate(["/add", roommate.id]);
   }
 
+  navigateToAllReviews(roommate: Roommate){
+    this.selectedRoommate = roommate;
+    this.router.navigate(["/reviews", roommate.id])
+  }
   constructor() {
     this.showAll()
-    this.filteredRoommates = this.roommates.slice();
-  }
-
-  ngOnInit(): void {
-    // Initialize the database
-    this.db.initDatabase();
-      this.showAll();
   }
 
   showAll() {
     this.dal.selectAll().then((data) => {
       this.roommates = data;
       console.log(this.roommates)
-      this.filteredRoommates = this.roommates.slice();
     }).catch((e) => {
       console.log(e);
       this.roommates = [];
-      this.filteredRoommates = [];
     })
   }
   calculateAge(dob: Date): number {
@@ -100,16 +93,5 @@ export class AllUsersComponent {
     const smoking = smokingCount > roommate.reviews.length / 2 ? "Smoker" : "Non-Smoker";
 
     return { petFriendly, smoking };
-  }
-
-  filterRoommates() {
-    if (this.searchQuery.trim() !== "") {
-      this.filteredRoommates = this.roommates.filter(roommate =>
-        `${roommate.firstName} ${roommate.lastName}`.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    } else {
-      // If the search query is empty, show all roommates
-      this.filteredRoommates = this.roommates.slice();
-    }
   }
 }

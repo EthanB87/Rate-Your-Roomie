@@ -20,6 +20,8 @@ export class NewUserComponent {
     "", []);
   dal = inject(RoommateDALService);
 
+
+
   onSubmit(): void {
     // Insert roommate review into the database
     this.dal.insert(this.roommate)

@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Reviews for {{ roommate?.firstName }} {{ roommate?.lastName }}</h2>
+
+  <div *ngIf="reviews && reviews.length > 0">
+    <div class="card" *ngFor="let review of reviews">
+      <div class="card-body">
+        <p><strong>Responsibility:</strong> {{ review.responsibility }}</p>
+        <p><strong>Cleanliness:</strong> {{ review.cleanliness }}</p>
+        <p><strong>Friendliness:</strong> {{ review.friendliness }}</p>
+        <p><strong>Noise:</strong> {{ review.noise }}</p>
+        <p><strong>Pet Friendly:</strong> {{ review.petFriendly }}</p>
+        <p><strong>Smoking:</strong> {{ review.smoking }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!reviews || reviews.length === 0">
+    <p>No reviews available for {{roommate?.firstName}} Would You Like to Add One?</p>
+    <button (click)="navigateToReview(roommate)">Leave a Review For</button>
+  </div>
+</div>

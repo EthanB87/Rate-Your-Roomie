@@ -12,9 +12,9 @@
   padding-bottom: 48px;
   color: #e7717d;
   background: #e7717a;
-  background: -moz-linear-gradient(left,#ee7767  0%,#e7717d 100%) !important;
-  background: -webkit-linear-gradient(left,#ee7767  0%,#e7717d 100%) !important;
-  background: linear-gradient(to right,#ee7767  0%,#e7717d  100%) !important;
+  background: -moz-linear-gradient(to left, #ee7767 0%, #e7717d 100%) !important;
+  background: -webkit-linear-gradient(to left, #ee7767 0%, #e7717d 100%) !important;
+  background: linear-gradient(to right, #ee7767 0%, #e7717d 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
@@ -38,7 +38,6 @@
 }
 #addForm .form-control:focus + .label,
 #addForm .form-control.not-empty + .label {
-  -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
 }
 #addForm .form-label {
@@ -51,9 +50,6 @@
   color: #e7717d;
   cursor: text;
   transition: -webkit-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out;
-  transition: transform .2s ease-in-out,
-  -webkit-transform .2s ease-in-out;
 }
 #addForm .btn-primary {
   display: inline-block;
@@ -67,4 +63,12 @@
   border: none;
   width:200px;
   cursor: pointer;
+}
+
+input, label{
+  color: #e7717d;
+}
+
+h2{
+  color: #ee7777;
 }

@@ -1,10 +1,10 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {SignUp} from "../../../../models/SignUp.Model";
-import {Login} from "../../../../models/Login.Model";
+import {SignUp} from "../../../models/SignUp.Model";
+import {Login} from "../../../models/Login.Model";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import {DatabaseService} from "../../../../services/database.service";
+import {DatabaseService} from "../../../services/database.service";
 
 @Component({
   selector: 'app-login',
