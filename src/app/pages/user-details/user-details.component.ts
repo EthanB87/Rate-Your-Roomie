@@ -87,13 +87,18 @@ export class UserDetailsComponent {
   }
 
   deleteUser(){
-    this.dal.delete(this.roommate)
-      .then((data) =>{
-        console.log(data);
-        this.router.navigateByUrl("/all");
-      }).catch(e => {
-      console.error('Error deleting roommate:', e);
-    });
+    if(confirm("Delete Cannot Be Undone. Do You Wish to Proceed?")){
+      this.dal.delete(this.roommate)
+        .then((data) =>{
+          console.log(data);
+          this.router.navigateByUrl("/all");
+        }).catch(e => {
+        console.error('Error deleting roommate:', e);
+      });
+    } else{
+      // Do Nothing
+    }
+
   }
   getLocation() {
     const subscription = this.geo.getCurrentLocation().then(data => {
