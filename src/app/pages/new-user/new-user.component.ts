@@ -99,7 +99,7 @@ export class NewUserComponent {
 
     // Initialize the platform object:
     var platform = new H.service.Platform({
-      'apikey': ''
+      'apikey': 'eLXqDntwWJTGEflnaqEP50pd0C4dutmZVmvf-ufT_e8'
     });
 
     // Obtain the default map types from the platform object
