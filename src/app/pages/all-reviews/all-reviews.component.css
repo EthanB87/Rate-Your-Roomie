@@ -1,0 +1,74 @@
+.parent {
+  background: linear-gradient(to right, #e2e2e2, #ee7777);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  padding: 5px; /* Adjust padding as needed */
+}
+
+/* Your existing styles */
+h2 {
+  color: #ffffff;
+}
+
+.card {
+  border: 1px solid #e7717d;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #e7717d;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  width: 200px;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 5px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+}
+
+.card-text {
+  margin-bottom: 5px;
+  color: #e0e0e0
+}
+
+.card-text strong {
+  margin-right: 5px;
+  color: #e0e0e0;
+}
+
+h5 {
+  color: #e0e0e0;
+}
+
+p {
+  color: #e7717d;
+}

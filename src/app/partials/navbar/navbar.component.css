@@ -1,5 +1,11 @@
 .navbar {
-  background-color: #ffffff;
+  background-color: #e7717d;
+  background: linear-gradient(to right, #e2e2e2, #ee7777);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: auto;
 }
 
 .navbar-brand {
@@ -11,7 +17,7 @@
 .navbar-nav .nav-link {
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  color: #e7717d;
+  color: #ffffff;
 }
 
 .navbar-nav .nav-link:hover {

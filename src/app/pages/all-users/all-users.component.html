@@ -1,9 +1,10 @@
 <app-navbar/>
-<div class="container">
-  <h2>Roommate List</h2>
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let roommate of roommates; let i = index">
+<div class="parent">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let roommate of roommates">
         <div class="card">
+          <img [src]="roommate.pfp" class="card-img-top" alt="profile picture">
           <div class="card-body">
             <h5 class="card-title">{{ roommate.firstName }} {{ roommate.lastName }}</h5>
             <p class="card-text"><strong>Age:</strong> {{ calculateAge(roommate.dob) }}</p>
@@ -18,10 +19,12 @@
               <p class="card-text"><strong>Pet Friendly:</strong> {{ calculateDisplayBooleans(roommate).petFriendly}}</p>
               <p class="card-text"><strong>Smoking:</strong> {{ calculateDisplayBooleans(roommate).smoking}}</p>
             </div>
-            <button (click)="navigateToAllReviews(roommate)" class="card-link">See all Reviews</button>
-            <button (click)="navigateToReview(roommate)" class="card-link">Add a New Review</button>
+            <button (click)="navigateToAllReviews(roommate)" class="btn btn-primary m-2" >See all Reviews</button>
+            <button (click)="navigateToReview(roommate)" class="btn btn-primary m-2">Add a New Review</button>
+            <button (click)="navigatetoUserDetails(roommate)" class="btn btn-primary m-2">Update Profile</button>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

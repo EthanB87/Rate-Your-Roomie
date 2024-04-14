@@ -1,3 +1,8 @@
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  position: relative;
+}
 .title {
   text-align: center;
   text-transform: uppercase;
@@ -7,37 +12,35 @@
   padding-bottom: 48px;
   color: #e7717d;
   background: #e7717a;
-  background: -moz-linear-gradient(left,#ee7767 0%,#e7717d 100%) !important;
-  background: -webkit-linear-gradient(left,#ee7767 0%,#e7717d 100%) !important;
-  background: linear-gradient(to right,#ee7767 0%,#e7717d 100%) !important;
+  background: -moz-linear-gradient(to left, #ee7767 0%, #e7717d 100%) !important;
+  background: -webkit-linear-gradient(to left, #ee7767 0%, #e7717d 100%) !important;
+  background: linear-gradient(to right, #ee7767 0%, #e7717d 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
-.form-field {
+#detailsForm .form-field {
   position: relative;
   margin: 32px 0;
 }
-
-.form-control {
+#detailsForm .form-control {
   display: block;
   width: 100%;
   height: 36px;
-  border: 2px solid #e7717d;
-  border-radius: 5px;
+  border-width: 0 0 2px 0;
+  border-color: #e7717d;
   font-size: 18px;
   line-height: 26px;
   font-weight: 400;
-  padding: 8px;
-  box-sizing: border-box;
 }
-
-.form-control:focus {
+#detailsForm .form-control:focus {
   outline: none;
-  border-color: #e7717d;
 }
-
-.form-label {
+#detailsForm .form-control:focus + .label,
+#detailsForm .form-control.not-empty + .label {
+  transform: translateY(-24px);
+}
+#detailsForm .form-label {
   position: absolute;
   left: 20px;
   bottom: 11px;
@@ -46,15 +49,9 @@
   font-weight: 400;
   color: #e7717d;
   cursor: text;
-  transition: transform .2s ease-in-out;
+  transition: -webkit-transform .2s ease-in-out;
 }
-
-.form-control:focus + .form-label,
-.form-control.not-empty + .form-label {
-  transform: translateY(-24px);
-}
-
-.btn-primary {
+#detailsForm .btn-primary {
   display: inline-block;
   background-color: #000;
   background-image: linear-gradient(125deg,#ee7767,#e7717d);
@@ -64,12 +61,12 @@
   font-size: 16px;
   padding: 8px 16px;
   border: none;
-  width: 200px;
+  width:200px;
   cursor: pointer;
 }
 
-.form-check-input[type="radio"] {
-  cursor: pointer;
+input, label{
+  color: #e7717d;
 }
 
 .parent{

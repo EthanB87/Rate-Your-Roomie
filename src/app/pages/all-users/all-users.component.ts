@@ -21,7 +21,7 @@ import {DatabaseService} from "../../../services/database.service";
 export class AllUsersComponent {
   roommates: Roommate[] = [];
   selectedRoommate: Roommate = new Roommate("", "", "", "", "",
-    0, 0, []);
+    0, 0, "", []);
   dal = inject(RoommateDALService);
   db = inject(DatabaseService);
   router = inject(Router);
@@ -33,6 +33,11 @@ export class AllUsersComponent {
   navigateToAllReviews(roommate: Roommate){
     this.selectedRoommate = roommate;
     this.router.navigate(["/reviews", roommate.id])
+  }
+
+  navigatetoUserDetails(roommate: Roommate){
+    this.selectedRoommate = roommate;
+    this.router.navigate(["/details", roommate.id])
   }
   constructor() {
     this.db.initDatabase();

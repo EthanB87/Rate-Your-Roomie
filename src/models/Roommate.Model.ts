@@ -9,10 +9,11 @@ export class Roommate {
   schoolName: string | null | undefined;
   latitude: number;
   longitude: number;
+  pfp: string;
   reviews: Review[];
 
   constructor(firstName: string | null | undefined, lastName: string | null | undefined, dob: string | null | undefined, schoolName: string | null | undefined,
-              gender: string | null | undefined, latitude: number, longitude: number, reviews: any[]) {
+              gender: string | null | undefined, latitude: number, longitude: number, pfp: string, reviews: any[]) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.dob = dob;
@@ -20,6 +21,7 @@ export class Roommate {
     this.schoolName = schoolName;
     this.latitude = latitude;
     this.longitude = longitude;
+    this.pfp = pfp;
     this.reviews = reviews;
   }
 }

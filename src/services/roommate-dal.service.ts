@@ -116,4 +116,31 @@ export class RoommateDALService {
       };
     });
   }
+  delete(roommate: Roommate): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const transaction = this.database.db.transaction(["roommates"], "readwrite");
+
+      transaction.oncomplete = (event: any) => {
+        console.log("Success: delete transaction successful");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("Error: error in delete transaction: " + event);
+      };
+
+      const roommateStore = transaction.objectStore("roommates");
+      if (roommate.id) {
+        const reqDelete = roommateStore.delete(roommate.id);
+        reqDelete.onsuccess = (event: any) => {
+          console.log(`Success: data deleted successfully: ${event}`);
+          resolve(event);
+        };
+        reqDelete.onerror = (event: any) => {
+          console.log(`Error: failed to delete: ${event}`);
+          reject(event);
+        };
+      } else {
+        reject("roommate does not have id")
+      }
+    });
+  }
 }

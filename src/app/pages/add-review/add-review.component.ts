@@ -18,7 +18,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AddReviewComponent {
   roommate: Roommate = new Roommate("", "", "", "", "",
-    0, 0, []);
+    0, 0, "", []);
   review: Review = new Review(1, 1, 1, 1, false, false);
   dal = inject(RoommateDALService);
   activatedRoute = inject(ActivatedRoute);
@@ -35,7 +35,7 @@ export class AddReviewComponent {
       })
   }
 
-  onSubmit(): void {
+  onSubmit(){
     // Add the review to the roommate's reviews array
     this.roommate.reviews.push(this.review);
     // Save the updated roommate data in the database
@@ -48,5 +48,13 @@ export class AddReviewComponent {
       .catch((e) => {
         console.log(e);
       })
+  }
+
+  checkMaxValue(field: string) {
+    // @ts-ignore
+    if (this.review[field] > 5) {
+      // @ts-ignore
+      this.review[field] = 5;
+    }
   }
 }

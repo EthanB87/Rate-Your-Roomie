@@ -1,26 +1,30 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NavbarComponent} from "../../partials/navbar/navbar.component";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Roommate} from "../../../models/Roommate.Model";
 import {RoommateDALService} from "../../../services/roommate-dal.service";
-import {Router} from "@angular/router";
+import {NgForOf, NgIf} from "@angular/common";
 import {DatabaseService} from "../../../services/database.service";
 import {GeoService} from "../../../services/geo.service";
 import {CameraService} from "../../../services/camera.service";
 
 declare const H: any;
 @Component({
-  selector: 'app-new-user',
+  selector: 'app-user-details',
   standalone: true,
-    imports: [
-        FormsModule,
-        NavbarComponent,
-        ReactiveFormsModule,
-    ],
-  templateUrl: './new-user.component.html',
-  styleUrl: './new-user.component.css'
+  imports: [
+    FormsModule,
+    NavbarComponent,
+    ReactiveFormsModule,
+    NgForOf,
+    NgIf
+  ],
+  templateUrl: './user-details.component.html',
+  styleUrl: './user-details.component.css'
 })
-export class NewUserComponent {
+export class UserDetailsComponent {
+  activatedRoute = inject(ActivatedRoute);
   roommate: Roommate = new Roommate("", "", "", "", "",
     0, 0, "", []);
   dal = inject(RoommateDALService);
@@ -34,35 +38,40 @@ export class NewUserComponent {
   lat: any;
   lon: any;
 
-  newUserForm = this.fb.group({
-    firstName: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(16)]],
-    lastName: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(16)]],
-    dob: ["", [Validators.required]],
-    schoolName: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
-    gender: ["", [Validators.required]],
-  });
-
-  refFirst = this.newUserForm.controls["firstName"];
-  refLast = this.newUserForm.controls["lastName"];
-  refDob = this.newUserForm.controls["dob"];
-  refSchool = this.newUserForm.controls["schoolName"];
-  refGender = this.newUserForm.controls["gender"];
 
   constructor() {
     this.db.initDatabase();
+    const id = Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    this.dal.select(id).then(roommate =>{
+      this.roommate = roommate;
+    }).catch(e =>{
+      console.log("Error in getting Roommate", e);
+    });
   }
 
-  onSubmit() {
-    if (this.newUserForm.valid && this.lon && this.lat) {
-      const firstName = this.newUserForm.get('firstName')?.value;
-      const lastName = this.newUserForm.get('lastName')?.value;
-      const dob = this.newUserForm.get('dob')?.value;
-      const schoolName = this.newUserForm.get('schoolName')?.value;
-      const gender = this.newUserForm.get('gender')?.value;
-      const roommate = new Roommate(firstName, lastName, dob, schoolName, gender,
-        this.lon, this.lat, this.roommate.pfp, []);
+  detailsForm = this.fb.group({
+    firstName: [this.roommate.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(16)]],
+    lastName: [this.roommate.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(16)]],
+    dob: [this.roommate.dob, [Validators.required]],
+    schoolName: [this.roommate.schoolName, [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
+    gender: [this.roommate.gender, [Validators.required]],
+  });
+
+  refFirst = this.detailsForm.controls["firstName"];
+  refLast = this.detailsForm.controls["lastName"];
+  refDob = this.detailsForm.controls["dob"];
+  refSchool = this.detailsForm.controls["schoolName"];
+  refGender = this.detailsForm.controls["gender"];
+
+  updateProfile() {
+    if (this.detailsForm.valid && this.lon && this.lat) {
+      this.roommate.firstName =  this.detailsForm.get('firstName')?.value;
+     this.roommate.lastName = this.detailsForm.get('lastName')?.value;
+     this.roommate.dob = this.detailsForm.get('dob')?.value;
+     this.roommate.schoolName = this.detailsForm.get('schoolName')?.value;
+     this.roommate.gender = this.detailsForm.get('gender')?.value;
       // Insert roommate review into the database
-      this.dal.insert(roommate)
+      this.dal.update(this.roommate)
         .then((data) => {
           console.log(data);
           this.router.navigateByUrl("/all");
@@ -75,6 +84,15 @@ export class NewUserComponent {
     }
   }
 
+  deleteUser(){
+    this.dal.delete(this.roommate)
+      .then((data) =>{
+        console.log(data);
+        this.router.navigateByUrl("/all");
+      }).catch(e => {
+      console.error('Error deleting roommate:', e);
+    });
+  }
   getLocation() {
     const subscription = this.geo.getCurrentLocation().then(data => {
       console.log(data);
