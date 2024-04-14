@@ -8,6 +8,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {DatabaseService} from "../../../services/database.service";
 import {GeoService} from "../../../services/geo.service";
 import {CameraService} from "../../../services/camera.service";
+import {FooterComponent} from "../../partials/footer/footer.component";
 
 declare const H: any;
 @Component({
@@ -18,7 +19,8 @@ declare const H: any;
     NavbarComponent,
     ReactiveFormsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    FooterComponent
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'

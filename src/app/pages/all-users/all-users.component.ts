@@ -6,6 +6,7 @@ import {NavbarComponent} from "../../partials/navbar/navbar.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {Review} from "../../../models/Review.Model";
 import {DatabaseService} from "../../../services/database.service";
+import {FooterComponent} from "../../partials/footer/footer.component";
 
 @Component({
   selector: 'app-all-users',
@@ -14,6 +15,7 @@ import {DatabaseService} from "../../../services/database.service";
     NavbarComponent,
     NgForOf,
     NgIf,
+    FooterComponent,
   ],
   templateUrl: './all-users.component.html',
   styleUrl: './all-users.component.css'

@@ -3,12 +3,12 @@
   <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
       <h1 class="display-4">Find Your Perfect Roommate</h1>
-      <p class="lead">Browse through profiles and find the ideal roommate for your living situation.</p>
+      <p class="lead p-3">Browse through profiles and find the ideal roommate for your living situation.</p>
       <button class="btn btn-primary btn-lg" (click)="navigateToAllUsers()">Get Started</button>
     </div>
   </div>
   <div class="container">
-    <h2 class="text-center mb-4">Featured Roommates</h2>
+    <h2 class="text-center p-4">Featured Roommates</h2>
     <div class="row">
       <div class="col-md-4" *ngFor="let roommate of roommates.slice(0, 3)">
         <div class="card mb-4">
@@ -23,3 +23,4 @@
     </div>
   </div>
 </div>
+<app-footer/>

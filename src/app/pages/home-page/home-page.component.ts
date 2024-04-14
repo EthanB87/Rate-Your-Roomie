@@ -5,13 +5,15 @@ import {Roommate} from "../../../models/Roommate.Model";
 import {RoommateDALService} from "../../../services/roommate-dal.service";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
+import {FooterComponent} from "../../partials/footer/footer.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     NavbarComponent,
-    NgForOf
+    NgForOf,
+    FooterComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'

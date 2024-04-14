@@ -5,6 +5,7 @@ import {NavbarComponent} from "../../partials/navbar/navbar.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {Review} from "../../../models/Review.Model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FooterComponent} from "../../partials/footer/footer.component";
 
 @Component({
   selector: 'app-all-reviews',
@@ -12,7 +13,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   imports: [
     NavbarComponent,
     NgForOf,
-    NgIf
+    NgIf,
+    FooterComponent
   ],
   templateUrl: './all-reviews.component.html',
   styleUrl: './all-reviews.component.css'

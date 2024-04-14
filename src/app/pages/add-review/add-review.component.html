@@ -4,43 +4,86 @@
     <div class="card shadow-sm border-0 rounded">
       <div class="card-body">
         <h2 class="title">Add Review for {{ roommate.firstName }} {{ roommate.lastName }}</h2>
-        <form>
+        <form [formGroup]="newReviewForm">
           <div class="form-group">
             <label for="responsibility">Responsibility:</label>
-            <input type="number" class="form-control" id="responsibility" [(ngModel)]="review.responsibility" name="responsibility"
-                   min="1" max="5">
+            <input type="number" class="form-control" id="responsibility" formControlName="responsibility" name="responsibility">
+            @if (refResp.invalid && (refResp.touched || refResp.dirty)){
+              @if (refResp.errors?.['required']) {
+                <small class="text-bg-primary">Number is Required</small><br>
+              }
+              @if (refResp.errors?.['min']) {
+                <small class="text-bg-primary">Rating Cannot Be Less than 1</small><br>
+              }
+              @if (refResp.errors?.['max']) {
+                <small class="text-bg-primary">Rating Cannot Be More than 5</small><br>
+              }
+            }
           </div>
           <div class="form-group">
             <label for="cleanliness">Cleanliness:</label>
-            <input type="number" class="form-control" id="cleanliness" [(ngModel)]="review.cleanliness" name="cleanliness" min="1" max="5">
+            <input type="number" class="form-control" id="cleanliness" formControlName="cleanliness" name="cleanliness">
+            @if (refClean.invalid && (refClean.touched || refClean.dirty)){
+              @if (refClean.errors?.['required']) {
+                <small class="text-bg-primary">Number is Required</small><br>
+              }
+              @if (refClean.errors?.['min']) {
+                <small class="text-bg-primary">Rating Cannot Be Less than 1</small><br>
+              }
+              @if (refClean.errors?.['max']) {
+                <small class="text-bg-primary">Rating Cannot Be More than 5</small><br>
+              }
+            }
           </div>
           <div class="form-group">
             <label for="friendliness">Friendliness:</label>
-            <input type="number" class="form-control" id="friendliness" [(ngModel)]="review.friendliness" name="friendliness" min="1" max="5">
+            <input type="number" class="form-control" id="friendliness" formControlName="friendliness" name="friendliness">
+            @if (refFriend.invalid && (refFriend.touched || refFriend.dirty)){
+              @if (refFriend.errors?.['required']) {
+                <small class="text-bg-primary">Number is Required</small><br>
+              }
+              @if (refFriend.errors?.['min']) {
+                <small class="text-bg-primary">Rating Cannot Be Less than 1</small><br>
+              }
+              @if (refFriend.errors?.['max']) {
+                <small class="text-bg-primary">Rating Cannot Be More than 5</small><br>
+              }
+            }
           </div>
           <div class="form-group">
             <label for="noise">Noise:</label>
-            <input type="number" class="form-control" id="noise" [(ngModel)]="review.noise" name="noise" min="1" max="5" readonly>
+            <input type="number" class="form-control" id="noise" formControlName="noise" name="noise">
+            @if (refNoise.invalid && (refNoise.touched || refNoise.dirty)){
+              @if (refNoise.errors?.['required']) {
+                <small class="text-bg-primary">Number is Required</small><br>
+              }
+              @if (refNoise.errors?.['min']) {
+                <small class="text-bg-primary">Rating Cannot Be Less than 1</small><br>
+              }
+              @if (refNoise.errors?.['max']) {
+                <small class="text-bg-primary">Rating Cannot Be More than 5</small><br>
+              }
+            }
           </div>
           <div class="form-group">
             <label>Pet Friendly:</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="petFriendly" id="petFriendlyYes" [(ngModel)]="review.petFriendly" [value]="true">
+              <input class="form-check-input" type="radio" name="petFriendly" id="petFriendlyYes" formControlName="petFriendly" [value]="true">
               <label class="form-check-label" for="petFriendlyYes">Yes</label>
-            </div>
+              </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="petFriendly" id="petFriendlyNo" [(ngModel)]="review.petFriendly" [value]="false">
+              <input class="form-check-input" type="radio" name="petFriendly" id="petFriendlyNo" formControlName="petFriendly" [value]="false">
               <label class="form-check-label" for="petFriendlyNo">No</label>
             </div>
           </div>
           <div class="form-group">
             <label>Smoking:</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="smoking" id="smokingYes" [(ngModel)]="review.smoking" [value]="true">
+              <input class="form-check-input" type="radio" name="smoking" id="smokingYes" formControlName="smoking" [value]="true">
               <label class="form-check-label" for="smokingYes">Yes</label>
-            </div>
+              </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="smoking" id="smokingNo" [(ngModel)]="review.smoking" [value]="false">
+              <input class="form-check-input" type="radio" name="smoking" id="smokingNo" formControlName="smoking" [value]="false">
               <label class="form-check-label" for="smokingNo">No</label>
             </div>
           </div>
@@ -50,3 +93,4 @@
     </div>
   </div>
 </div>
+<app-footer/>

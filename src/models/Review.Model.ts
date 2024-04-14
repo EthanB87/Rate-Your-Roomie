@@ -1,13 +1,13 @@
 export class Review {
-  responsibility: number;
-  cleanliness: number;
-  friendliness: number;
-  noise: number;
-  petFriendly: boolean;
-  smoking: boolean;
+  responsibility: number | null | undefined;
+  cleanliness: number | null | undefined;
+  friendliness: number | null | undefined;
+  noise: number | null | undefined;
+  petFriendly: boolean | undefined | null;
+  smoking: boolean | undefined | null;
 
-  constructor(responsibility: number, cleanliness: number,  friendliness: number, noise: number,
-  petFriendly: boolean, smoking: boolean) {
+  constructor(responsibility: number | null | undefined, cleanliness: number | null | undefined, friendliness: number | null | undefined, noise: number | null | undefined,
+              petFriendly: null | undefined | boolean, smoking: null | undefined | boolean) {
     this.responsibility = responsibility;
     this.cleanliness = cleanliness;
     this.friendliness = friendliness;

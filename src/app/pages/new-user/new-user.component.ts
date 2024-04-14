@@ -7,16 +7,18 @@ import {Router} from "@angular/router";
 import {DatabaseService} from "../../../services/database.service";
 import {GeoService} from "../../../services/geo.service";
 import {CameraService} from "../../../services/camera.service";
+import {FooterComponent} from "../../partials/footer/footer.component";
 
 declare const H: any;
 @Component({
   selector: 'app-new-user',
   standalone: true,
-    imports: [
-        FormsModule,
-        NavbarComponent,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    FormsModule,
+    NavbarComponent,
+    ReactiveFormsModule,
+    FooterComponent,
+  ],
   templateUrl: './new-user.component.html',
   styleUrl: './new-user.component.css'
 })

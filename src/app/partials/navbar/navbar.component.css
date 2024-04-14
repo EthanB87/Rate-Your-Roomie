@@ -34,6 +34,14 @@
   padding: 0 20px;
 }
 
+.navbar-toggler {
+  color: #ffffff;
+}
+.navbar-toggle-icon {
+  color: #ffffff;
+}
+
+
 @media (max-width: 767px) {
   .navbar-nav .nav-item {
     margin-bottom: 10px;
